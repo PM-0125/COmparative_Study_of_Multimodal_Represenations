@@ -1,26 +1,13 @@
-# Data files (don't commit large data)
+# .gitignore
 data/raw/
 data/processed/
-
-# Model weights/checkpoints
 src/comparative/checkpoints/
 results/
-
-# Python cache
 __pycache__/
 *.pyc
 *.pyo
-
-# Jupyter
 .ipynb_checkpoints/
-
-# System/IDE/editor stuff
 .DS_Store
 .vscode/
 .idea/
-
-# Logs
 *.log
-
-# Notebooks outputs (optional)
-notebooks/*.ipynb
