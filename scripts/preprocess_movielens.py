@@ -38,6 +38,12 @@ movie_tag_matrix = movie_tag_matrix.loc[movies['movieId']]
 # -- Also filter ratings to only those movies --
 ratings = ratings[ratings['movieId'].isin(valid_movie_ids)].copy()
 
+# -- Rebuild movie2idx with filtered movie list --
+movie2idx = {m: i for i, m in enumerate(sorted(movies['movieId'].unique()))}
+movies['movie_idx'] = movies['movieId'].map(movie2idx)
+ratings['movie_idx'] = ratings['movieId'].map(movie2idx)
+
+
 # Optional: normalize each movie's tag vector
 from sklearn.preprocessing import normalize
 movie_tag_matrix = pd.DataFrame(
