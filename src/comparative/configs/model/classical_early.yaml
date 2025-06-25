@@ -1,6 +1,10 @@
+# src/comparative/configs/model/classical_early.yaml
 _target_: comparative.models.classical.early_fusion.EarlyFusionClassifier
-
 model_name: distilbert-base-uncased
 n_classes: 2
-lr: 2e-5
+fusion_hidden: 256
+lr: 2.0e-5
 wd: 0.01
+image_emb_dim: null
+graph_emb_dim: null
+tabular_dim: null
