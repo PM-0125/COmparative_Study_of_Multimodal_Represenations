@@ -1,0 +1,7 @@
+_target_: comparative.datasets.amazon_datamodule.AmazonDataModule
+
+data_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/amazon
+batch_size: 32
+max_len: 128
+model_name: distilbert-base-uncased
+num_workers: 8

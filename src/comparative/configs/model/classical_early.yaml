@@ -1,0 +1,6 @@
+_target_: comparative.models.classical.early_fusion.EarlyFusionClassifier
+
+model_name: distilbert-base-uncased
+n_classes: 2
+lr: 2e-5
+wd: 0.01
