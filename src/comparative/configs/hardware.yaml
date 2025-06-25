@@ -1,0 +1,6 @@
+# src/comparative/configs/hardware.yaml
+# Hardware-specific settings (for DataLoader, etc.)
+
+num_workers: 12   # Use 8–16 for your 16-core system; can go higher if RAM is not a bottleneck
+pin_memory: true  # Set false for pure CPU
+prefetch_factor: 2

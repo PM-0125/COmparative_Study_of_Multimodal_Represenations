@@ -1,0 +1,27 @@
+# src/comparative/configs/trainer.yaml
+# PyTorch Lightning Trainer common arguments
+accelerator: auto         # Let Lightning pick GPU if available, else CPU
+devices: auto             # Use all GPUs if present, else 1 CPU
+max_epochs: 15            # Default epochs for meaningful results
+log_every_n_steps: 20
+gradient_clip_val: 1.0
+deterministic: true
+precision: 32-true
+
+# Callbacks (these get added in train.py with Hydra)
+callbacks:
+  - model_checkpoint:
+      monitor: val_loss
+      save_top_k: 1
+      mode: min
+      dirpath: /data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/
+      filename: "{epoch}-{val_loss:.2f}"
+  - early_stopping:
+      monitor: val_loss
+      patience: 3
+      mode: min
+
+# Logging
+logger:
+  - tensorboard
+  - csv
