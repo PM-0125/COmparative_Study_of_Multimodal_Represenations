@@ -3,7 +3,7 @@ defaults:
   - data: amazon       # Can be: amazon, fashionai, movielens
   - model: classical_early   # Can be: classical_early, classical_late, clip, vilbert, mvae, hybrid
   - train: cpu         # Or: cpu_debug, gpu, cpu_ddp
-  - hardware: hardware
+  - hardware
   - override hydra/job_logging: disabled
   - _self_
 

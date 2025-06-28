@@ -27,7 +27,7 @@ class AmazonReviewDataset(Dataset):
             return_tensors="pt"
         )
         item = {k: v.squeeze(0) for k, v in enc.items()}
-        item['labels'] = label
+        item['label'] = label-1 # Adjust label to be zero-indexed
         return item
 
 class AmazonDataModule(pl.LightningDataModule):

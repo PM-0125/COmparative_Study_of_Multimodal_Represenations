@@ -4,11 +4,15 @@ from pathlib import Path
 print("="*20, "AMAZON", "="*20)
 df_train = pd.read_csv("/data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/amazon/train.csv")
 df_test = pd.read_csv("/data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/amazon/test.csv")
+def_val = pd.read_csv("/data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/amazon/val.csv")
 
 print("Train label counts:\n", df_train['label'].value_counts(), "\n")
 print("Test label counts:\n", df_test['label'].value_counts(), "\n")
+print("Validation set label counts:\n", def_val['label'].value_counts(), "\n")
 print("Train missing values:\n", df_train.isnull().sum(), "\n")
 print("Test missing values:\n", df_test.isnull().sum(), "\n")
+print("Validation set missing values:\n", def_val.isnull().sum(), "\n")
+
 
 print("="*20, "FASHIONAI", "="*20)
 df_fashion_train = pd.read_csv("/data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/fashionai/train.csv")

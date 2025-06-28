@@ -55,6 +55,8 @@ class EarlyFusionClassifier(pl.LightningModule):
             x.append(batch['graph_emb'])
         if 'tabular' in batch and batch['tabular'] is not None:
             x.append(batch['tabular'])
+        if not x:
+            raise ValueError("No modality found in batch for EarlyFusionClassifier!")
 
         # Concatenate all available modalities
         fused = torch.cat(x, dim=1)

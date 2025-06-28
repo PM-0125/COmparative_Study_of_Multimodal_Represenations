@@ -1,8 +1,8 @@
 # src/comparative/configs/data/amazon.yaml
 _target_: comparative.datasets.amazon_datamodule.AmazonDataModule
 
-data_dir: ${oc.env:PROJECT_ROOT}/data/processed/amazon
+data_dir: ${oc.env:PROJECT_ROOT}/data/processed/amazon/
 tokenizer_name: distilbert-base-uncased
-batch_size: 32
+batch_size: 64
 max_len: 128
 num_workers: 12

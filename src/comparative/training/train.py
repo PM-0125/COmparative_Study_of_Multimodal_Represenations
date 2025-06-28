@@ -1,14 +1,12 @@
 # src/comparative/training/train.py
 
 from __future__ import annotations
-from pathlib import Path
 import hydra
 from omegaconf import DictConfig, OmegaConf
 from rich import print as rprint
 import pytorch_lightning as pl
 
 from comparative.training.callbacks import basic_callbacks
-from comparative.training.datamodule_registry import get_datamodule
 from comparative.utils.seed import seed_everything
 
 @hydra.main(config_path="/data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/configs", config_name="config", version_base=None)
@@ -19,8 +17,8 @@ def main(cfg: DictConfig) -> None:
     # Set global seed for reproducibility
     seed_everything(cfg.get("seed", 42))
 
-    # Instantiate DataModule (using registry pattern)
-    datamodule = get_datamodule(cfg.data)
+    # Instantiate DataModule directly with hydra (no registry)
+    datamodule = hydra.utils.instantiate(cfg.data)
     datamodule.setup()
 
     # Instantiate model
