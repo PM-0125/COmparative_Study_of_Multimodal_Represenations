@@ -99,11 +99,11 @@ hydra:
     task:
     - model=classical_early
     - data=amazon
-    - train=gpu
+    - train=cpu_debug
   job:
     name: train
     chdir: null
-    override_dirname: data=amazon,model=classical_early,train=gpu
+    override_dirname: data=amazon,model=classical_early,train=cpu_debug
     id: ???
     num: ???
     config_name: config
@@ -128,9 +128,9 @@ hydra:
     - path: ''
       schema: structured
       provider: schema
-    output_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/outputs/2025-06-27/18-31-51
+    output_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/outputs/2025-06-28/19-02-07
     choices:
-      train: gpu
+      train: cpu_debug
       model: classical_early
       data: amazon
       hydra/env: default

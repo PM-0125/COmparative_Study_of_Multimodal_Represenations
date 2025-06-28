@@ -2,7 +2,7 @@ data:
   _target_: comparative.datasets.amazon_datamodule.AmazonDataModule
   data_dir: ${oc.env:PROJECT_ROOT}/data/processed/amazon/
   tokenizer_name: distilbert-base-uncased
-  batch_size: 32
+  batch_size: 64
   max_len: 128
   num_workers: 12
 model:
@@ -17,11 +17,13 @@ model:
   tabular_dim: null
 train:
   _target_: pytorch_lightning.Trainer
-  accelerator: gpu
+  accelerator: cpu
   devices: 1
-  max_epochs: 15
-  log_every_n_steps: 20
-  default_root_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/checkpoints/
+  max_epochs: 1
+  limit_train_batches: 30
+  limit_val_batches: 10
+  log_every_n_steps: 5
+  default_root_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/checkpoints/debug/
 num_workers: 12
 pin_memory: true
 prefetch_factor: 2

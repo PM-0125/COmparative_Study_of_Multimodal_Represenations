@@ -97,13 +97,13 @@ hydra:
     hydra:
     - hydra.mode=RUN
     task:
-    - model=classical_late
+    - model=classical_early
     - data=amazon
-    - train=cpu_dpp
+    - train=cpu_debug
   job:
     name: train
     chdir: null
-    override_dirname: data=amazon,model=classical_late,train=cpu_dpp
+    override_dirname: data=amazon,model=classical_early,train=cpu_debug
     id: ???
     num: ???
     config_name: config
@@ -128,10 +128,10 @@ hydra:
     - path: ''
       schema: structured
       provider: schema
-    output_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/outputs/2025-06-28/18-09-28
+    output_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/outputs/2025-06-28/19-10-09
     choices:
-      train: cpu_dpp
-      model: classical_late
+      train: cpu_debug
+      model: classical_early
       data: amazon
       hydra/env: default
       hydra/callbacks: null
