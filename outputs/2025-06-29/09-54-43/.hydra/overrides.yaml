@@ -1,3 +1,3 @@
 - model=classical_early
 - data=amazon
-- train=cpu_debug
+- train=gpu

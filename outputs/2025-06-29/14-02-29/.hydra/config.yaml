@@ -2,25 +2,29 @@ data:
   _target_: comparative.datasets.amazon_datamodule.AmazonDataModule
   data_dir: ${oc.env:PROJECT_ROOT}/data/processed/amazon/
   tokenizer_name: distilbert-base-uncased
-  batch_size: 64
+  batch_size: 32
   max_len: 128
   num_workers: 12
+  train_samples: 100000
+  val_samples: 20000
+  test_samples: 20000
 model:
-  _target_: comparative.models.classical.early_fusion.EarlyFusionClassifier
-  model_name: distilbert-base-uncased
+  _target_: comparative.models.classical.late_fusion.LateFusionClassifier
+  text_model_name: distilbert-base-uncased
+  image_model_name: resnet18
   n_classes: 2
+  use_text: true
+  use_image: false
+  use_graph: false
+  use_tabular: false
   fusion_hidden: 256
   lr: 2.0e-05
   wd: 0.01
-  image_emb_dim: null
-  graph_emb_dim: null
-  tabular_dim: null
 train:
   _target_: pytorch_lightning.Trainer
-  accelerator: cpu
-  devices: 12
-  strategy: ddp
-  max_epochs: 5
+  accelerator: gpu
+  devices: 1
+  max_epochs: 15
   log_every_n_steps: 20
   default_root_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/checkpoints/
 num_workers: 12
