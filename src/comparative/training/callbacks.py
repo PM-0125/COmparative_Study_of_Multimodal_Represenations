@@ -8,7 +8,7 @@ def basic_callbacks(cfg=None):
 
     # Save best and last model (per metric, per run)
     checkpoint_cb = ModelCheckpoint(
-        dirpath=f"checkpoints/{cfg.model.name if cfg and hasattr(cfg.model, 'name') else 'default'}/",
+        dirpath=f"/data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/checkpoints/{cfg.model.name if cfg and hasattr(cfg.model, 'name') else 'default'}/",
         save_top_k=1,
         monitor="val_loss",
         mode="min",
