@@ -1,7 +1,7 @@
 # src/comparative/configs/data/movielens.yaml
 _target_: comparative.datasets.movielens_datamodule.MovieLensDataModule
 
-data_dir: ${oc.env:PROJECT_ROOT}/data/processed/movielens
+data_dir: ${oc.env:PROJECT_ROOT}/data/processed/movielens/
 batch_size: 64
 max_len: 128
 num_workers: 12

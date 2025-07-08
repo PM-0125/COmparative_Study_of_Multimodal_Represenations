@@ -1,0 +1,3 @@
+- model=classical_early
+- data=fashionai
+- train=gpu

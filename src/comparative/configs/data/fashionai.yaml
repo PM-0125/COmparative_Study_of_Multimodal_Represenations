@@ -1,7 +1,7 @@
 # src/comparative/configs/data/fashionai.yaml
 _target_: comparative.datasets.fashion_datamodule.FashionAIDatamodule
 
-data_dir: ${oc.env:PROJECT_ROOT}/data/processed/fashionai
+data_dir: ${oc.env:PROJECT_ROOT}/data/processed/fashionai/
 tokenizer_name: distilbert-base-uncased
 batch_size: 32
 max_len: 128

@@ -1,0 +1,30 @@
+data:
+  _target_: comparative.datasets.fashion_datamodule.FashionAIDatamodule
+  data_dir: ${oc.env:PROJECT_ROOT}/data/processed/fashionai
+  tokenizer_name: distilbert-base-uncased
+  batch_size: 32
+  max_len: 128
+  img_size: 224
+  num_workers: 12
+model:
+  _target_: comparative.models.classical.early_fusion.EarlyFusionClassifier
+  model_name: distilbert-base-uncased
+  n_classes: 139
+  fusion_hidden: 256
+  lr: 2.0e-05
+  wd: 0.01
+  image_emb_dim: null
+  graph_emb_dim: null
+  tabular_dim: null
+train:
+  _target_: pytorch_lightning.Trainer
+  accelerator: gpu
+  devices: 1
+  max_epochs: 15
+  log_every_n_steps: 20
+  default_root_dir: /data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/checkpoints/
+num_workers: 12
+pin_memory: true
+prefetch_factor: 2
+seed: 42
+output_dir: ${oc.env:PROJECT_ROOT}/results/${data}

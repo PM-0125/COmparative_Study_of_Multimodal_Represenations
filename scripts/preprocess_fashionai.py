@@ -1,23 +1,46 @@
+import torch
+import torchvision.models as models
+import torchvision.transforms as T
+from PIL import Image
 import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
+import numpy as np
 
-RAW = Path('/data_vault/COmparative_Study_of_Multimodal_Represenations/data/raw/fashionai')
+# Paths
 PROCESSED = Path('/data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/fashionai')
-PROCESSED.mkdir(parents=True, exist_ok=True)
+SPLITS = ['train', 'val', 'test']  # Add/remove as needed
 
-df = pd.read_csv(RAW / 'data.csv')
-img_dir = RAW / 'data'
-# Filter to keep only rows with actual image files
-df['image_path'] = df['image'].apply(lambda x: str(img_dir / x) if (img_dir / x).exists() else None)
-df = df.dropna(subset=['image_path'])
-# Basic clean text fields
-df['description'] = df['description'].fillna('').astype(str).str.strip().str.lower()
-df['label'] = df['category'].astype(str)
-df_out = df[['image_path', 'description', 'label']]
-# Split (e.g. 80/20 train/val split)
-df_out = df_out.sample(frac=1, random_state=42).reset_index(drop=True)
-n_train = int(0.8 * len(df_out))
-df_out.iloc[:n_train].to_csv(PROCESSED / 'train.csv', index=False)
-df_out.iloc[n_train:].to_csv(PROCESSED / 'val.csv', index=False)
-print("FashionAI preprocessing done!")
+# Image transform
+transform = T.Compose([
+    T.Resize((224, 224)),
+    T.ToTensor(),
+    T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+])
+
+# Load ResNet18 (no classifier head)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+resnet = models.resnet18(pretrained=True)
+resnet.fc = torch.nn.Identity()
+resnet = resnet.to(device)
+resnet.eval()
+
+def embed_images(csv_path, output_path):
+    df = pd.read_csv(csv_path)
+    features = []
+    for img_path in tqdm(df['image_path'], desc=f'Embedding {csv_path.name}'):
+        img = Image.open(img_path).convert("RGB")
+        inp = transform(img).unsqueeze(0).to(device)
+        with torch.no_grad():
+            feat = resnet(inp).cpu().numpy().flatten()
+        features.append(feat)
+    arr = np.stack(features)
+    np.save(output_path, arr)
+    print(f"Saved: {output_path} | Shape: {arr.shape}")
+
+# Loop over all splits that exist
+for split in SPLITS:
+    csv_path = PROCESSED / f"{split}.csv"
+    out_path = PROCESSED / f"{split}_image_emb.npy"
+    if csv_path.exists():
+        embed_images(csv_path, out_path)
