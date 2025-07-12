@@ -1,15 +1,14 @@
 # .gitignore
-/mnt/data_vault/COmparative_Study_of_Multimodal_Represenations/data/raw/
-/mnt/data_vault/COmparative_Study_of_Multimodal_Represenations/data/processed/
-/mnt/data_vault/COmparative_Study_of_Multimodal_Represenations/src/comparative/checkpoints/
-/mnt/data_vault/COmparative_Study_of_Multimodal_Represenations/results/
+data/raw/
+data/processed/
+src/comparative/checkpoints/
+results/
+backup/
+outputs/
 __pycache__/
 *.pyc
 *.pyo
-# .ipynb_checkpoints/
 .DS_Store
 .vscode/
 .idea/
 *.log
-/mnt/data_vault/COmparative_Study_of_Multimodal_Represenations/backup/
-/mnt/data_vault/COmparative_Study_of_Multimodal_Represenations/outputs/
