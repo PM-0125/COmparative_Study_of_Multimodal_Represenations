@@ -1,7 +1,8 @@
 # .gitignore
 data/raw/
 data/processed/
-src/comparative/checkpoints/
+src/comparative/checkpoints/default/
+src/comparative/checkpoints/lightning_logs/
 results/
 backup/
 outputs/
