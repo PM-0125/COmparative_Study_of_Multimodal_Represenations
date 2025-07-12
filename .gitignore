@@ -6,8 +6,9 @@ results/
 __pycache__/
 *.pyc
 *.pyo
-.ipynb_checkpoints/
+# .ipynb_checkpoints/
 .DS_Store
 .vscode/
 .idea/
 *.log
+backup/
